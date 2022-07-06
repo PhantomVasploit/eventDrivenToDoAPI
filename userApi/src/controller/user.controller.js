@@ -21,8 +21,7 @@ module.exports.register = (req, res)=>{
 module.exports.login = async (req, res)=>{
   try {
     const {email, password} = req.body;
-    const user = await User.findOne({email})
-    console.log(`${JSON.stringify(user)}`);
+    const user = await User.findOne({email});
     if(!user){
       res.status(400).json({message: 'Invalid login credentials'});
     }else {
@@ -55,9 +54,9 @@ module.exports.updateAccount = (req, res)=>{
 module.exports.deleteAccount = (req, res)=>{
   const toId = mongoose.Types.ObjectId;
   const userId = toId(req.params.userId);
-  User.findOneAndDelete({_id: userId})
+  User.findOneAndRemove({_id: userId})
   .then((user)=>{
-    res.status(200).json({message: `User account deleted successfully`, user: _pick(user, ['_id', 'firstName', 'lastName', 'email'])})
+    res.status(200).json({message: 'User account deleted successfully', user: _.pick(user, ['firstName', 'lastName', 'email', '_id'])})
   })
   .catch((e)=>{
     res.status(400).json({message: `Error deleting user account: ${e.message}`});
