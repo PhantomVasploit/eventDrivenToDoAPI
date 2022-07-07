@@ -8,10 +8,11 @@ require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 5001;
-require('./config/db.config');
 const {errorLogging} = require('./middleware/errorLogging');
 const logger = require('./config/winston.config');
 const routes = require('./routes/routes');
+require('./config/db.config');
+require('./messagebroker/consumer');
 
 winston.exceptions.handle(new winston.transports.File({filename: "Exception.log"}));
 process.on('unhandledRejection', (ex)=>{

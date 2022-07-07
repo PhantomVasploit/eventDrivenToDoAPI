@@ -27,8 +27,8 @@ app.use('/api/user', routes);
 app.use(errorLogging);
 
 const server = app.listen(port, ()=>{
-  logger.info(`User service running on: http://127.0.0.1:${port}\n`)
-  console.log(`User service running on: http://127.0.0.1:${port}\n`);
+  logger.info(`User service running on: http://127.0.0.1:${port}`)
+  console.log(`User service running on: http://127.0.0.1:${port}`);
 })
 
 module.exports = server;
